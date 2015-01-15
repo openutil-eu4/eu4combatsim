@@ -1,0 +1,17 @@
+You generally want to edit the circled areas in the file ComSim.java.
+
+width is kind of the combat width, but not really linked to the technology. It should just be enough for Infantry and Cavalry.
+
+minlevel and maxlevel are for the level range you want to simulate.
+
+iterations are how often the simulation is run for every level. Should be at least 1000 for a stable result, but you get still some variance up to 50000. But 100 are also enough to get a rough idea of the average battle outcome.
+
+If you simulate only 1 level with 1 iteration, you get a simple, but detailed battle history.
+
+general stats. Fire and shock are self explaining, but it usually does only make sense to enter the stat differences. For tradition I used a statistical approach, every 44 tradition adds 1 fire and shock and values in between have a proportional chance to add a pip, eg. 22 tradition have 50% chance. Maneuver and Siege do currently nothing.
+
+In the technology part you can specify a technology level advantage, discipline and morale. Discipline and morale are doubles, so you have to convert the percentages accordingly. eg 5% extra discipline become 1.05 and 15% extra morale become 1.15.
+
+You can change the models from WesternInfantry to EasternInfantry etc. All tech groups are implemented. For all names consult the class names. Artillery exists only in one form(western), but you can mix them. You can also specify an exact unit model (eg. winged hussar), if you know the number. For the number, you currently have to open the corresponding class and count the columns (or the eu4wiki and count rows). Remember to start counting at 0. It only makes sense to specify an exact unit model, if you only simulate the corresponding level. -1 selects a random level appropriate unit for mass simulation. The last parameter is the combat ability, it has the same conversion rules like discipline and morale.
+
+Finally you need to specify the number of infantry, cavalry and artillery. The simulator puts infantry in the middle, cavalry at the side and artillery only in the second row. It can't handle more artillery than inf+cav and and can't handle armies with more difference in combat width than flanking range. Before level 7, artillery is ignored. It was also designed for an even number of units which can be deployed symmetrically. And it doesn't implement the cavalry ratio penalty, so if you simulate at the edge of the ratio, the results can be wrong.
